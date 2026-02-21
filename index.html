@@ -1,458 +1,415 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Panadería Delicias — Landing</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Panadería Aurora | Horneado diario</title>
+  <meta name="description" content="Panadería artesanal: horneado diario, pedidos por WhatsApp, productos frescos y entrega." />
 
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <!-- Tailwind (framework CSS) -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Bootstrap Icons (íconos, no imágenes) -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"/>
+  <!-- Fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@300;400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- Tu CSS -->
   <link rel="stylesheet" href="index.css" />
 </head>
 
-<body>
-  <!-- Topbar -->
-  <div class="topbar py-2">
-    <div class="container d-flex flex-wrap justify-content-between align-items-center gap-2">
-      <div class="d-flex align-items-center gap-2">
-        <i class="bi bi-geo-alt"></i>
-        <small>San Miguel de Tucumán — Envíos en el día</small>
-      </div>
-      <div class="d-flex align-items-center gap-3">
-        <small><i class="bi bi-clock"></i> Lun a Sáb 8:00–20:30</small>
-        <a class="topbar-link" href="#productos"><i class="bi bi-bag"></i> Ver productos</a>
-      </div>
-    </div>
+<body class="bg-[var(--bg)] text-[var(--text)] selection:bg-[var(--accent)] selection:text-black">
+
+  <!-- DECOR -->
+  <div class="fixed inset-0 -z-10 pointer-events-none">
+    <div class="grain"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
   </div>
 
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg sticky-top nav-glass">
-    <div class="container">
-      <a class="navbar-brand brand d-flex align-items-center gap-2" href="#">
-        <span class="brand-badge"><i class="bi bi-basket2-fill"></i></span>
-        <span>Panadería <b>Delicias</b></span>
-      </a>
-
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navMain">
-        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
-          <li class="nav-item"><a class="nav-link" href="#productos">Productos</a></li>
-          <li class="nav-item"><a class="nav-link" href="#combos">Combos</a></li>
-          <li class="nav-item"><a class="nav-link" href="#opiniones">Opiniones</a></li>
-          <li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
-
-          <li class="nav-item ms-lg-2">
-            <a id="btnWhatsappNav" class="btn btn-brand btn-sm px-3" href="#" target="_blank" rel="noopener">
-              <i class="bi bi-whatsapp"></i> Pedir por WhatsApp
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Hero -->
-  <header class="hero">
-    <div class="container py-5">
-      <div class="row align-items-center g-4">
-        <div class="col-lg-6 reveal">
-          <span class="chip mb-3"><i class="bi bi-lightning-charge"></i> Producción diaria + ingredientes premium</span>
-          <h1 class="display-5 fw-bold lh-sm">
-            Panadería artesanal con <span class="text-accent">sabor real</span> y entrega rápida.
-          </h1>
-          <p class="lead text-muted mt-3">
-            Facturas, pan casero, budines y chipá. Todo recién hecho.
-            Pedí en 1 minuto por WhatsApp.
-          </p>
-
-          <div class="d-flex flex-wrap gap-2 mt-4">
-            <a href="#productos" class="btn btn-brand btn-lg">
-              <i class="bi bi-bag-check"></i> Ver catálogo
-            </a>
-            <button class="btn btn-outline-brand btn-lg" data-bs-toggle="modal" data-bs-target="#modalPromo">
-              <i class="bi bi-stars"></i> Promo del día
-            </button>
+  <!-- NAV -->
+  <header class="sticky top-0 z-40">
+    <nav id="nav"
+      class="navGlass mx-auto mt-3 w-[min(1100px,92%)] rounded-2xl px-4 py-3 transition-all">
+      <div class="flex items-center justify-between gap-4">
+        <a href="#inicio" class="flex items-center gap-3">
+          <span class="logoMark">A</span>
+          <div class="leading-tight">
+            <p class="font-[var(--fontTitle)] text-lg tracking-wide">Panadería Aurora</p>
+            <p class="text-xs opacity-70 -mt-1">Horneado diario · pedidos rápidos</p>
           </div>
+        </a>
 
-          <div class="hero-stats mt-4">
-            <div class="stat">
-              <div class="stat-num"><span class="count" data-count="25">0</span>+</div>
-              <div class="stat-label">Productos</div>
-            </div>
-            <div class="stat">
-              <div class="stat-num"><span class="count" data-count="120">0</span>+</div>
-              <div class="stat-label">Pedidos/semana</div>
-            </div>
-            <div class="stat">
-              <div class="stat-num"><span class="count" data-count="4">0</span>.9</div>
-              <div class="stat-label">Valoración</div>
-            </div>
-          </div>
-        </div>
+        <button id="btnMenu" class="md:hidden btnIcon" aria-label="Abrir menú">
+          <span class="iLine"></span><span class="iLine"></span><span class="iLine"></span>
+        </button>
 
-        <div class="col-lg-6 reveal">
-          <div class="hero-card">
-            <!-- IMPORTANTE: imagen local -->
-            <img src="img/hero-panaderia.png" alt="Panadería Delicias" class="hero-img" />
-            <div class="hero-badge">
-              <i class="bi bi-truck"></i> Envíos rápidos
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+        <div id="menu" class="hidden md:flex items-center gap-2">
+          <a class="navLink" href="#productos">Productos</a>
+          <a class="navLink" href="#sobre">Sobre</a>
+          <a class="navLink" href="#opiniones">Opiniones</a>
+          <a class="navLink" href="#contacto">Contacto</a>
 
-    <div class="hero-wave"></div>
-  </header>
-
-  <!-- Productos -->
-  <section id="productos" class="section">
-    <div class="container">
-      <div class="d-flex flex-wrap justify-content-between align-items-end gap-3 mb-4 reveal">
-        <div>
-          <h2 class="section-title mb-1">Productos destacados</h2>
-          <p class="text-muted mb-0">Todos con imagen en tamaño estándar (sin recorte).</p>
-        </div>
-
-        <div class="d-flex gap-2">
-          <div class="input-group input-group-sm search-group">
-            <span class="input-group-text"><i class="bi bi-search"></i></span>
-            <input id="searchInput" type="text" class="form-control" placeholder="Buscar: factura, chipá, pan..." />
-          </div>
-
-          <select id="categorySelect" class="form-select form-select-sm">
-            <option value="all" selected>Todas</option>
-            <option value="dulce">Dulce</option>
-            <option value="salado">Salado</option>
-            <option value="pan">Pan</option>
-          </select>
-        </div>
-      </div>
-
-      <div id="productsGrid" class="row g-4">
-        <!-- JS inyecta productos acá -->
-      </div>
-    </div>
-  </section>
-
-  <!-- Combos -->
-  <section id="combos" class="section section-alt">
-    <div class="container">
-      <div class="row g-4 align-items-stretch">
-        <div class="col-lg-6 reveal">
-          <div class="card soft-card h-100">
-            <div class="card-body p-4">
-              <div class="d-flex align-items-center gap-2 mb-2">
-                <span class="pill"><i class="bi bi-gift"></i> Combo</span>
-                <span class="pill pill-2"><i class="bi bi-cash-coin"></i> Ahorro</span>
-              </div>
-              <h3 class="fw-bold mb-2">Merienda completa</h3>
-              <p class="text-muted mb-3">
-                12 facturas + 1 budín + 1 pan casero. Ideal para oficina o familia.
-              </p>
-
-              <div class="d-flex flex-wrap gap-2">
-                <button class="btn btn-brand" data-bs-toggle="modal" data-bs-target="#modalCombo">
-                  Ver detalle
-                </button>
-                <a id="btnWhatsappCombo" class="btn btn-outline-brand" href="#" target="_blank" rel="noopener">
-                  Pedir este combo
-                </a>
-              </div>
-
-              <hr class="my-4"/>
-
-              <div class="d-flex gap-3 flex-wrap">
-                <div class="mini">
-                  <i class="bi bi-check2-circle"></i> Recién hecho
-                </div>
-                <div class="mini">
-                  <i class="bi bi-check2-circle"></i> Entrega rápida
-                </div>
-                <div class="mini">
-                  <i class="bi bi-check2-circle"></i> Atención por WhatsApp
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-6 reveal">
-          <div class="card soft-card h-100 combo-visual">
-            <div class="card-body p-4">
-              <h4 class="fw-bold mb-3">¿Por qué nos eligen?</h4>
-
-              <div class="feature">
-                <div class="feature-ico"><i class="bi bi-flower1"></i></div>
-                <div>
-                  <div class="feature-title">Ingredientes seleccionados</div>
-                  <div class="feature-text">Menos “industrial”, más sabor.</div>
-                </div>
-              </div>
-
-              <div class="feature">
-                <div class="feature-ico"><i class="bi bi-thermometer-sun"></i></div>
-                <div>
-                  <div class="feature-title">Horneado por tandas</div>
-                  <div class="feature-text">Más fresco durante el día.</div>
-                </div>
-              </div>
-
-              <div class="feature">
-                <div class="feature-ico"><i class="bi bi-chat-dots"></i></div>
-                <div>
-                  <div class="feature-title">Pedido fácil</div>
-                  <div class="feature-text">1 click y listo por WhatsApp.</div>
-                </div>
-              </div>
-
-              <div class="mt-4">
-                <button class="btn btn-outline-brand w-100" data-bs-toggle="modal" data-bs-target="#modalNosotros">
-                  Conocé nuestra historia
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- Opiniones -->
-  <section id="opiniones" class="section">
-    <div class="container">
-      <div class="text-center mb-4 reveal">
-        <h2 class="section-title mb-1">Opiniones</h2>
-        <p class="text-muted mb-0">Clientes felices = horno contento 🍞</p>
-      </div>
-
-      <div class="row g-4">
-        <div class="col-md-4 reveal">
-          <div class="card review-card h-100">
-            <div class="card-body p-4">
-              <div class="stars mb-2">
-                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-              </div>
-              <p class="mb-3">“Las facturas llegan calentitas. Tremendo.”</p>
-              <div class="small text-muted">— Martina</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-4 reveal">
-          <div class="card review-card h-100">
-            <div class="card-body p-4">
-              <div class="stars mb-2">
-                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i>
-              </div>
-              <p class="mb-3">“El pan casero es una locura. Muy buen precio.”</p>
-              <div class="small text-muted">— Javier</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-4 reveal">
-          <div class="card review-card h-100">
-            <div class="card-body p-4">
-              <div class="stars mb-2">
-                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-              </div>
-              <p class="mb-3">“Pedí por WhatsApp y en 10/10 la atención.”</p>
-              <div class="small text-muted">— Rocío</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- Contacto / CTA -->
-  <section id="contacto" class="section section-cta">
-    <div class="container">
-      <div class="cta-card reveal">
-        <div class="row align-items-center g-3">
-          <div class="col-lg-8">
-            <h3 class="fw-bold mb-1">¿Listo para pedir?</h3>
-            <p class="text-muted mb-0">
-              Decinos qué querés y la cantidad. Te respondemos al toque.
-            </p>
-          </div>
-          <div class="col-lg-4 text-lg-end">
-            <a id="btnWhatsappCta" class="btn btn-brand btn-lg w-100 w-lg-auto" href="#" target="_blank" rel="noopener">
-              <i class="bi bi-whatsapp"></i> Abrir WhatsApp
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <footer class="py-4 text-center text-muted small">
-        <div class="d-flex justify-content-center gap-3 flex-wrap">
-          <span><i class="bi bi-shield-check"></i> Calidad garantizada</span>
-          <span><i class="bi bi-credit-card"></i> Transferencia / efectivo</span>
-          <span><i class="bi bi-truck"></i> Envíos</span>
-        </div>
-        <div class="mt-2">© <span id="year"></span> Panadería Delicias — Hecho con Bootstrap</div>
-      </footer>
-    </div>
-  </section>
-
-  <!-- WhatsApp flotante -->
-  <a id="btnWhatsappFloat" class="whatsapp-float" href="#" target="_blank" rel="noopener" aria-label="WhatsApp">
-    <i class="bi bi-whatsapp"></i>
-  </a>
-
-  <!-- Modal Promo -->
-  <div class="modal fade" id="modalPromo" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content modal-soft">
-        <div class="modal-header">
-          <h5 class="modal-title"><i class="bi bi-stars"></i> Promo del día</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-        </div>
-        <div class="modal-body">
-          <p class="mb-2"><b>Promo:</b> 12 facturas surtidas + 2 cafés (o chocolatada) — <b>precio especial</b>.</p>
-          <p class="text-muted mb-0">Pedila por WhatsApp y te confirmamos disponibilidad.</p>
-        </div>
-        <div class="modal-footer">
-          <button class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button>
-          <a id="btnWhatsappPromo" class="btn btn-brand" href="#" target="_blank" rel="noopener">
-            Pedir promo
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Modal Combo -->
-  <div class="modal fade" id="modalCombo" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-      <div class="modal-content modal-soft">
-        <div class="modal-header">
-          <h5 class="modal-title"><i class="bi bi-gift"></i> Combo Merienda Completa</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-        </div>
-        <div class="modal-body">
-          <div class="row g-3 align-items-center">
-            <div class="col-md-5">
-              <div class="img-frame">
-                <img src="img/factura.png" class="img-contain" alt="Combo merienda" />
-              </div>
-            </div>
-            <div class="col-md-7">
-              <ul class="list-unstyled mb-3">
-                <li class="mb-2"><i class="bi bi-check2"></i> 12 facturas surtidas</li>
-                <li class="mb-2"><i class="bi bi-check2"></i> 1 budín marmolado</li>
-                <li class="mb-2"><i class="bi bi-check2"></i> 1 pan casero</li>
-                <li class="mb-2"><i class="bi bi-check2"></i> Entrega rápida</li>
-              </ul>
-              <div class="alert alert-warning mb-0">
-                <i class="bi bi-info-circle"></i> Las imágenes son ilustrativas.
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button>
-          <a id="btnWhatsappComboModal" class="btn btn-brand" href="#" target="_blank" rel="noopener">
+          <a id="ctaWhats"
+             class="btnPrimary ml-2"
+             href="https://wa.me/5490000000000?text=Hola%20Aurora!%20Quiero%20hacer%20un%20pedido%20😊"
+             target="_blank" rel="noopener">
             Pedir por WhatsApp
           </a>
         </div>
       </div>
-    </div>
-  </div>
 
-  <!-- Modal Nosotros -->
-  <div class="modal fade" id="modalNosotros" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content modal-soft">
-        <div class="modal-header">
-          <h5 class="modal-title"><i class="bi bi-heart"></i> Nuestra historia</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-        </div>
-        <div class="modal-body">
-          <p class="mb-2">
-            Hacemos panificados con receta casera, cuidando el punto del horno y los ingredientes.
-            Nuestro objetivo: que cada pedido llegue <b>fresco</b> y con buena atención.
-          </p>
-          <p class="text-muted mb-0">Probá una vez y volvés 😄</p>
-        </div>
-        <div class="modal-footer">
-          <button class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button>
-          <a id="btnWhatsappHistoria" class="btn btn-brand" href="#" target="_blank" rel="noopener">
-            Hablar por WhatsApp
+      <!-- Mobile menu -->
+      <div id="menuMobile" class="md:hidden hidden pt-4">
+        <div class="grid gap-2">
+          <a class="navLink" href="#productos">Productos</a>
+          <a class="navLink" href="#sobre">Sobre</a>
+          <a class="navLink" href="#opiniones">Opiniones</a>
+          <a class="navLink" href="#contacto">Contacto</a>
+          <a class="btnPrimary mt-2"
+             href="https://wa.me/5490000000000?text=Hola%20Aurora!%20Quiero%20hacer%20un%20pedido%20😊"
+             target="_blank" rel="noopener">
+            Pedir por WhatsApp
           </a>
         </div>
       </div>
-    </div>
-  </div>
+    </nav>
+  </header>
 
-  <!-- Modal Producto (único, se rellena con JS) -->
-  <div class="modal fade" id="productModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-      <div class="modal-content modal-soft">
-        <div class="modal-header">
-          <h5 class="modal-title" id="pmTitle">Producto</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-        </div>
-        <div class="modal-body">
-          <div class="row g-3 align-items-center">
-            <div class="col-md-5">
-              <div class="img-frame">
-                <img id="pmImg" src="" class="img-contain" alt="Producto" />
-              </div>
+  <!-- HERO -->
+  <main id="inicio" class="mx-auto w-[min(1100px,92%)]">
+    <section class="pt-8 md:pt-12">
+      <div class="grid md:grid-cols-12 gap-6 items-stretch">
+        <div class="md:col-span-5 reveal">
+          <div class="cardSoft h-full p-6 md:p-8">
+            <p class="badge">Panadería artesanal</p>
+
+            <h1 class="mt-3 font-[var(--fontTitle)] text-4xl md:text-5xl leading-[1.05]">
+              Sabor de horno,
+              <span class="textAccent">estilo de barrio</span>.
+            </h1>
+
+            <p class="mt-4 text-base md:text-lg opacity-80 leading-relaxed">
+              Facturas, medialunas y pan casero recién hechos.
+              Pedí por WhatsApp y retirás en el local o coordinamos entrega.
+            </p>
+
+            <div class="mt-6 flex flex-wrap gap-3">
+              <a class="btnPrimary"
+                 href="#productos">
+                Ver productos
+              </a>
+
+              <button id="btnPromo" class="btnGhost">
+                Ver promo del día
+              </button>
             </div>
-            <div class="col-md-7">
-              <div class="d-flex flex-wrap gap-2 mb-2">
-                <span id="pmTag" class="pill"></span>
-                <span class="pill pill-2"><i class="bi bi-thermometer-sun"></i> Recién hecho</span>
+
+            <div class="mt-7 grid grid-cols-3 gap-3">
+              <div class="miniStat">
+                <p class="miniK">Fresco</p>
+                <p class="miniV">Diario</p>
               </div>
-
-              <p id="pmDesc" class="text-muted mb-3"></p>
-
-              <div class="d-flex align-items-center justify-content-between gap-3 flex-wrap">
-                <div class="price">
-                  <span class="price-label">Precio sugerido</span>
-                  <span id="pmPrice" class="price-value"></span>
-                </div>
-
-                <div class="qty">
-                  <button id="qtyMinus" class="btn btn-outline-brand btn-sm">-</button>
-                  <input id="qtyInput" type="number" min="1" value="1" class="form-control form-control-sm text-center" />
-                  <button id="qtyPlus" class="btn btn-outline-brand btn-sm">+</button>
-                </div>
+              <div class="miniStat">
+                <p class="miniK">Pedidos</p>
+                <p class="miniV">WhatsApp</p>
               </div>
-
-              <div class="mt-3 alert alert-warning mb-0">
-                <i class="bi bi-info-circle"></i> Confirmamos stock por WhatsApp.
+              <div class="miniStat">
+                <p class="miniK">Opciones</p>
+                <p class="miniV">Dulce/Salado</p>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="modal-footer">
-          <button class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button>
-          <a id="pmWhatsapp" class="btn btn-brand" href="#" target="_blank" rel="noopener">
-            <i class="bi bi-whatsapp"></i> Pedir por WhatsApp
+        <div class="md:col-span-7 reveal">
+          <div class="heroFrame relative overflow-hidden rounded-3xl">
+            <img
+              src="img/hero-panaderia.png"
+              alt="Mostrador de panadería con variedad de panes y facturas"
+              class="w-full h-[320px] md:h-[420px] object-cover"
+              loading="eager"
+            />
+            <div class="heroOverlay"></div>
+
+            <div class="absolute bottom-4 left-4 right-4">
+              <div class="heroCaption">
+                <p class="font-[var(--fontTitle)] text-xl md:text-2xl">Horneado de madrugada</p>
+                <p class="text-sm opacity-85">Listo para tu mañana ☕</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRODUCTS -->
+    <section id="productos" class="pt-14 md:pt-20">
+      <div class="flex items-end justify-between gap-4 reveal">
+        <div>
+          <h2 class="sectionTitle">Productos destacados</h2>
+          <p class="sectionSub">Todas las fotos en tamaño estándar sin recortar (object-contain).</p>
+        </div>
+
+        <div class="hidden md:flex items-center gap-2">
+          <button class="chip isActive" data-filter="todos">Todos</button>
+          <button class="chip" data-filter="dulce">Dulce</button>
+          <button class="chip" data-filter="salado">Salado</button>
+        </div>
+      </div>
+
+      <!-- chips mobile -->
+      <div class="mt-4 flex md:hidden gap-2 overflow-auto pb-2 reveal">
+        <button class="chip isActive" data-filter="todos">Todos</button>
+        <button class="chip" data-filter="dulce">Dulce</button>
+        <button class="chip" data-filter="salado">Salado</button>
+      </div>
+
+      <div id="gridProducts" class="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+        <!-- Cards se generan por JS -->
+      </div>
+
+      <div class="mt-8 reveal">
+        <div class="callout">
+          <div>
+            <p class="font-[var(--fontTitle)] text-2xl">¿Querés pedido para oficina o evento?</p>
+            <p class="opacity-80 mt-1">Armamos bandejas y combos. Te lo cotizamos por WhatsApp.</p>
+          </div>
+          <a class="btnPrimary"
+             href="https://wa.me/5490000000000?text=Hola%20Aurora!%20Quiero%20cotizar%20un%20pedido%20para%20evento%20🎉"
+             target="_blank" rel="noopener">
+            Cotizar ahora
           </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="sobre" class="pt-14 md:pt-20">
+      <div class="grid md:grid-cols-12 gap-6 items-start">
+        <div class="md:col-span-5 reveal">
+          <div class="cardSoft p-6 md:p-8">
+            <h2 class="sectionTitle">Hecho con método</h2>
+            <p class="sectionSub mt-2">
+              Fermentación lenta, ingredientes simples y un objetivo: que se note en el sabor.
+            </p>
+
+            <div class="mt-6 grid gap-3">
+              <div class="featureRow">
+                <span class="dot"></span>
+                <div>
+                  <p class="font-semibold">Horneado por tandas</p>
+                  <p class="opacity-75 text-sm">Para que siempre llegue tibio al mostrador.</p>
+                </div>
+              </div>
+
+              <div class="featureRow">
+                <span class="dot"></span>
+                <div>
+                  <p class="font-semibold">Fotos reales de producto</p>
+                  <p class="opacity-75 text-sm">Sin recorte: mantenemos proporción y calidad visual.</p>
+                </div>
+              </div>
+
+              <div class="featureRow">
+                <span class="dot"></span>
+                <div>
+                  <p class="font-semibold">Pedidos simples</p>
+                  <p class="opacity-75 text-sm">WhatsApp con mensaje prearmado y confirmación rápida.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="md:col-span-7 reveal">
+          <div class="cardSoft p-6 md:p-8">
+            <div class="flex items-center justify-between gap-3">
+              <p class="badge">Combo sugerido</p>
+              <span class="text-xs opacity-60">Actualizable desde JS</span>
+            </div>
+
+            <h3 class="mt-3 font-[var(--fontTitle)] text-3xl">“Mañana completa”</h3>
+            <p class="mt-2 opacity-80">
+              6 medialunas + 6 facturas + 1 pan casero
+              <span class="textAccent font-semibold">— ideal para compartir</span>.
+            </p>
+
+            <div class="mt-6 grid sm:grid-cols-3 gap-3">
+              <div class="miniCard">
+                <p class="miniK">Dulce</p>
+                <p class="miniV">Facturas</p>
+              </div>
+              <div class="miniCard">
+                <p class="miniK">Clásico</p>
+                <p class="miniV">Medialunas</p>
+              </div>
+              <div class="miniCard">
+                <p class="miniK">Casero</p>
+                <p class="miniV">Pan</p>
+              </div>
+            </div>
+
+            <div class="mt-6 flex flex-wrap gap-3">
+              <a class="btnPrimary"
+                 href="https://wa.me/5490000000000?text=Hola%20Aurora!%20Quiero%20el%20combo%20%22Ma%C3%B1ana%20completa%22%20🥐🍞"
+                 target="_blank" rel="noopener">
+                Pedir este combo
+              </a>
+              <button class="btnGhost" id="btnScrollOpiniones">Ver opiniones</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REVIEWS -->
+    <section id="opiniones" class="pt-14 md:pt-20">
+      <div class="reveal">
+        <h2 class="sectionTitle">Opiniones</h2>
+        <p class="sectionSub">Texto de ejemplo (podés reemplazarlo por reseñas reales).</p>
+      </div>
+
+      <div class="mt-6 grid md:grid-cols-3 gap-4 md:gap-5">
+        <article class="quoteCard reveal">
+          <p class="quote">“Las medialunas tienen ese brillo y esa manteca que no falla.”</p>
+          <p class="who">— Sofi, cliente habitual</p>
+        </article>
+
+        <article class="quoteCard reveal">
+          <p class="quote">“Pedí para la oficina y llegaron puntuales. Todo impecable.”</p>
+          <p class="who">— Marcos, pedidos grandes</p>
+        </article>
+
+        <article class="quoteCard reveal">
+          <p class="quote">“El pan casero es una locura, tostado queda perfecto.”</p>
+          <p class="who">— Juli, fan del pan</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contacto" class="pt-14 md:pt-20 pb-20">
+      <div class="grid md:grid-cols-12 gap-6 items-stretch">
+        <div class="md:col-span-5 reveal">
+          <div class="cardSoft h-full p-6 md:p-8">
+            <h2 class="sectionTitle">Contacto</h2>
+            <p class="sectionSub mt-2">
+              Dejá tu zona y qué querés pedir. Te respondemos con disponibilidad y precio.
+            </p>
+
+            <div class="mt-6 grid gap-3">
+              <div class="infoRow">
+                <span class="tag">Horarios</span>
+                <p class="opacity-80">Lun a Sáb · 07:00 a 20:00</p>
+              </div>
+              <div class="infoRow">
+                <span class="tag">Dirección</span>
+                <p class="opacity-80">Tu dirección acá (editar)</p>
+              </div>
+              <div class="infoRow">
+                <span class="tag">WhatsApp</span>
+                <p class="opacity-80">+54 9 0000 000000 (editar)</p>
+              </div>
+            </div>
+
+            <a class="btnPrimary mt-6 inline-flex"
+               href="https://wa.me/5490000000000?text=Hola%20Aurora!%20Soy%20de%20____%20y%20quiero%20pedir%20____%20😊"
+               target="_blank" rel="noopener">
+              Hablar por WhatsApp
+            </a>
+          </div>
+        </div>
+
+        <div class="md:col-span-7 reveal">
+          <div class="cardSoft h-full p-6 md:p-8">
+            <h3 class="font-[var(--fontTitle)] text-2xl">Mensaje rápido</h3>
+            <p class="opacity-75 mt-1">Esto arma el texto y abre WhatsApp con tu mensaje.</p>
+
+            <form id="formMsg" class="mt-6 grid gap-3">
+              <div class="grid sm:grid-cols-2 gap-3">
+                <div class="field">
+                  <label>Tu nombre</label>
+                  <input id="fNombre" type="text" placeholder="Ej: Rubén" autocomplete="name" required>
+                </div>
+                <div class="field">
+                  <label>Zona</label>
+                  <input id="fZona" type="text" placeholder="Ej: Centro" required>
+                </div>
+              </div>
+
+              <div class="field">
+                <label>Pedido</label>
+                <input id="fPedido" type="text" placeholder="Ej: 6 medialunas + 6 facturas" required>
+              </div>
+
+              <div class="field">
+                <label>Notas (opcional)</label>
+                <textarea id="fNotas" rows="3" placeholder="Ej: para las 10:30, sin azúcar en el budín"></textarea>
+              </div>
+
+              <div class="flex flex-wrap gap-3 items-center">
+                <button class="btnPrimary" type="submit">Enviar a WhatsApp</button>
+                <button id="btnLimpiar" class="btnGhost" type="button">Limpiar</button>
+                <span class="text-xs opacity-60">* Editá tu número en el JS.</span>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <footer class="mt-10 text-center text-sm opacity-70">
+        <p>© <span id="year"></span> Panadería Aurora · Diseñada con estilo editorial.</p>
+      </footer>
+    </section>
+  </main>
+
+  <!-- MODAL PRODUCTO -->
+  <div id="modal" class="modal hidden" aria-hidden="true">
+    <div class="modalBackdrop" data-close="1"></div>
+
+    <div class="modalBox">
+      <button class="modalClose" aria-label="Cerrar" data-close="1">✕</button>
+
+      <div class="grid md:grid-cols-2 gap-5">
+        <div class="modalImgWrap">
+          <img id="mImg" src="" alt="" class="w-full h-full object-contain">
+        </div>
+
+        <div class="py-1">
+          <p id="mTag" class="badge inline-flex"></p>
+          <h3 id="mTitle" class="mt-2 font-[var(--fontTitle)] text-3xl"></h3>
+          <p id="mDesc" class="mt-2 opacity-80 leading-relaxed"></p>
+
+          <div class="mt-5 flex flex-wrap gap-3 items-center">
+            <span id="mPrice" class="pricePill"></span>
+
+            <a id="mWhats" class="btnPrimary"
+               href="#" target="_blank" rel="noopener">
+              Pedir por WhatsApp
+            </a>
+
+            <button class="btnGhost" data-close="1">Seguir mirando</button>
+          </div>
+
+          <div class="mt-5 hint">
+            Tip: podés cambiar precios, textos y categorías en <b>index.js</b>.
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- FLOATING WHATSAPP -->
+  <a id="floatWhats"
+     class="floatWhats"
+     href="https://wa.me/5490000000000?text=Hola%20Aurora!%20Quiero%20hacer%20un%20pedido%20😊"
+     target="_blank" rel="noopener"
+     aria-label="WhatsApp">
+    <span class="wIcon">🟢</span>
+    <span class="wText">WhatsApp</span>
+  </a>
 
-  <!-- Tu JS -->
   <script src="index.js"></script>
 </body>
 </html>

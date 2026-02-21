@@ -1,310 +1,385 @@
-/* =========================
-   Config general
-   ========================= */
+/* ===========================
+   Panadería Aurora — index.js
+   (placeholder WhatsApp)
+=========================== */
 
-// ⚠️ Cambiá esto por tu WhatsApp (Argentina ejemplo: 549381XXXXXXX)
-const WHATSAPP_NUMBER = "5493810000000";
+/** ✅ Cambiá SOLO este número (formato internacional sin +, sin espacios) */
+const WHATSAPP_NUMBER = "5490000000000";
 
-// Mensaje base para WhatsApp
-const BASE_MESSAGE = "Hola! Quiero hacer un pedido en Panadería Delicias. ";
-
-// Productos (podés agregar más)
-const products = [
+/** ✅ Productos (usan tus imágenes locales en /img) */
+const PRODUCTS = [
   {
-    id: "facturas",
-    name: "Facturas surtidas",
-    category: "dulce",
-    price: "$ Consultar",
-    img: "img/factura.png",
+    id: "factura",
+    title: "Factura",
     tag: "Dulce",
-    desc: "Surtidas y frescas. Ideales para mate o café. Se entregan por docena o media docena."
+    category: "dulce",
+    price: "$2.200",
+    img: "img/factura.png",
+    desc: "Clásica factura artesanal. Ideal para acompañar el mate o el café."
   },
   {
-    id: "medialunas",
-    name: "Medialunas",
-    category: "dulce",
-    price: "$ Consultar",
-    img: "img/medialuna.png",
+    id: "medialuna",
+    title: "Medialuna",
     tag: "Dulce",
-    desc: "Clásicas, tiernas y con buen dorado. Dulces o saladas según stock."
+    category: "dulce",
+    price: "$1.900",
+    img: "img/medialuna.png",
+    desc: "Medialuna hojaldrada, brillo perfecto y sabor mantecoso."
   },
   {
     id: "pan-casero",
-    name: "Pan casero",
-    category: "pan",
-    price: "$ Consultar",
+    title: "Pan casero",
+    tag: "Salado",
+    category: "salado",
+    price: "$3.800",
     img: "img/pan-casero.png",
-    tag: "Pan",
-    desc: "Miga suave, corteza fina. Perfecto para sandwich o tostadas."
+    desc: "Pan casero de miga esponjosa y corteza crocante. Perfecto para tostadas."
   },
   {
     id: "budin",
-    name: "Budín marmolado",
-    category: "dulce",
-    price: "$ Consultar",
-    img: "img/budin.png",
+    title: "Budín",
     tag: "Dulce",
-    desc: "Marmolado húmedo y rendidor. Ideal para compartir."
+    category: "dulce",
+    price: "$3.200",
+    img: "img/budin.png",
+    desc: "Budín húmedo y suave. Ideal para compartir en la merienda."
   },
   {
     id: "chipa",
-    name: "Chipá",
-    category: "salado",
-    price: "$ Consultar",
-    img: "img/chipa.png",
+    title: "Chipá",
     tag: "Salado",
-    desc: "Bien quesoso, crocante por fuera y suave por dentro. ¡Un clásico!"
+    category: "salado",
+    price: "$2.600",
+    img: "img/chipa.png",
+    desc: "Chipá calentito, con queso y una textura irresistible."
   },
   {
-    id: "miga",
-    name: "Sándwich de miga",
-    category: "salado",
-    price: "$ Consultar",
-    img: "img/sandwich-miga.png",
+    id: "sandwich-miga",
+    title: "Sándwich de miga",
     tag: "Salado",
-    desc: "Jamón y queso (y variantes). Consultá por bandejas para eventos."
+    category: "salado",
+    price: "$4.500",
+    img: "img/sandwich-miga.png",
+    desc: "Sándwich de miga prolijo y fresco. Ideal para oficina o eventos."
   }
 ];
 
-// DOM
-const grid = document.getElementById("productsGrid");
-const searchInput = document.getElementById("searchInput");
-const categorySelect = document.getElementById("categorySelect");
-
-// Modal producto
-const pmTitle = document.getElementById("pmTitle");
-const pmImg = document.getElementById("pmImg");
-const pmDesc = document.getElementById("pmDesc");
-const pmTag = document.getElementById("pmTag");
-const pmPrice = document.getElementById("pmPrice");
-const pmWhatsapp = document.getElementById("pmWhatsapp");
-const qtyInput = document.getElementById("qtyInput");
-const qtyMinus = document.getElementById("qtyMinus");
-const qtyPlus = document.getElementById("qtyPlus");
-
-// Botones WhatsApp generales
-const btnWhatsappNav = document.getElementById("btnWhatsappNav");
-const btnWhatsappCta = document.getElementById("btnWhatsappCta");
-const btnWhatsappFloat = document.getElementById("btnWhatsappFloat");
-const btnWhatsappPromo = document.getElementById("btnWhatsappPromo");
-const btnWhatsappCombo = document.getElementById("btnWhatsappCombo");
-const btnWhatsappComboModal = document.getElementById("btnWhatsappComboModal");
-const btnWhatsappHistoria = document.getElementById("btnWhatsappHistoria");
-
-// Contador año
-document.getElementById("year").textContent = new Date().getFullYear();
-
-/* =========================
+/* ===========================
    Helpers
-   ========================= */
+=========================== */
+const $ = (sel, parent = document) => parent.querySelector(sel);
+const $$ = (sel, parent = document) => [...parent.querySelectorAll(sel)];
 
-// Arma link de WhatsApp con texto
-function whatsappLink(message) {
-  const text = encodeURIComponent(message);
-  return `https://wa.me/${WHATSAPP_NUMBER}?text=${text}`;
+function encodeText(text) {
+  return encodeURIComponent(text);
 }
 
-// Setea links base
-function setGlobalWhatsAppLinks() {
-  const msg = BASE_MESSAGE + "¿Me pasás el catálogo y precios?";
-  const link = whatsappLink(msg);
-
-  btnWhatsappNav.href = link;
-  btnWhatsappCta.href = link;
-  btnWhatsappFloat.href = link;
-  btnWhatsappHistoria.href = whatsappLink(BASE_MESSAGE + "Hola! Quiero consultar sobre la panadería 😊");
-  btnWhatsappPromo.href = whatsappLink(BASE_MESSAGE + "Quiero pedir la *Promo del día*. ¿Qué incluye y precio?");
-  btnWhatsappCombo.href = whatsappLink(BASE_MESSAGE + "Quiero pedir el *Combo Merienda Completa*.");
-  btnWhatsappComboModal.href = whatsappLink(BASE_MESSAGE + "Quiero pedir el *Combo Merienda Completa*.");
+function waLink(message) {
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeText(message)}`;
 }
 
-setGlobalWhatsAppLinks();
-
-/* =========================
+/* ===========================
    Render productos
-   ========================= */
+=========================== */
+const grid = $("#gridProducts");
 
-function productCardTemplate(p) {
+function productCard(p) {
+  // Card (usa clases de tu CSS)
   return `
-    <div class="col-sm-6 col-lg-4 reveal" data-cat="${p.category}">
-      <div class="product-card card h-100">
-        <div class="product-media">
-          <!-- Imagen local, NO se recorta por CSS -->
-          <img src="${p.img}" alt="${p.name}">
-        </div>
-        <div class="card-body p-4 d-flex flex-column">
-          <div class="d-flex justify-content-between align-items-start gap-2">
-            <h5 class="fw-bold mb-1">${p.name}</h5>
-            <span class="pill">${p.tag}</span>
-          </div>
-
-          <p class="text-muted mb-3">${p.desc}</p>
-
-          <div class="mt-auto d-flex justify-content-between align-items-center gap-2 flex-wrap">
-            <div class="price">
-              <span class="price-label">Precio sugerido</span>
-              <span class="price-value">${p.price}</span>
-            </div>
-
-            <div class="d-flex gap-2">
-              <button class="btn btn-outline-brand btn-sm" data-action="view" data-id="${p.id}" data-bs-toggle="modal" data-bs-target="#productModal">
-                Ver
-              </button>
-              <a class="btn btn-brand btn-sm" target="_blank" rel="noopener"
-                 href="${whatsappLink(BASE_MESSAGE + "Quiero pedir: *" + p.name + "* (cantidad a confirmar).")}">
-                <i class="bi bi-whatsapp"></i>
-              </a>
-            </div>
-          </div>
-        </div>
+    <article class="pCard reveal" data-cat="${p.category}">
+      <div class="pTop">
+        <span class="pTag">${p.tag}</span>
+        <span class="pricePill">${p.price}</span>
       </div>
-    </div>
+
+      <div class="pImgWrap">
+        <img src="${p.img}" alt="${p.title}" loading="lazy" />
+      </div>
+
+      <div class="pBody">
+        <h3 class="pTitle">${p.title}</h3>
+        <p class="pDesc">${p.desc}</p>
+      </div>
+
+      <div class="pBottom">
+        <button class="pBtn" data-open="${p.id}">Ver detalle</button>
+        <a class="pBtn" href="${waLink(`Hola Aurora! Quiero pedir: ${p.title} 😊`)}" target="_blank" rel="noopener">
+          Pedir
+        </a>
+      </div>
+    </article>
   `;
 }
 
 function renderProducts(list) {
-  grid.innerHTML = list.map(productCardTemplate).join("");
-  attachCardEvents();
-  revealOnScroll(); // recalcula reveal en nuevos nodos
-}
+  if (!grid) return;
+  grid.innerHTML = list.map(productCard).join("");
 
-renderProducts(products);
-
-/* =========================
-   Filtros: búsqueda + categoría
-   ========================= */
-
-function applyFilters() {
-  const q = (searchInput.value || "").toLowerCase().trim();
-  const cat = categorySelect.value;
-
-  const filtered = products.filter(p => {
-    const matchesText =
-      p.name.toLowerCase().includes(q) ||
-      p.desc.toLowerCase().includes(q) ||
-      p.tag.toLowerCase().includes(q);
-
-    const matchesCat = (cat === "all") ? true : (p.category === cat);
-
-    return matchesText && matchesCat;
-  });
-
-  renderProducts(filtered);
-}
-
-searchInput.addEventListener("input", applyFilters);
-categorySelect.addEventListener("change", applyFilters);
-
-/* =========================
-   Modal producto (dinámico)
-   ========================= */
-
-let currentProduct = null;
-
-function attachCardEvents() {
-  document.querySelectorAll('[data-action="view"]').forEach(btn => {
+  // Re-enganchar eventos de abrir modal
+  $$("[data-open]").forEach(btn => {
     btn.addEventListener("click", () => {
-      const id = btn.getAttribute("data-id");
-      currentProduct = products.find(x => x.id === id);
-      openProductModal(currentProduct);
+      const id = btn.getAttribute("data-open");
+      const prod = PRODUCTS.find(x => x.id === id);
+      if (prod) openModal(prod);
+    });
+  });
+
+  // Activar reveal para los nuevos nodos
+  setupReveal(); // crea observer si no existe y observa
+}
+
+/* ===========================
+   Filtros (chips)
+=========================== */
+let currentFilter = "todos";
+
+function setActiveChip(filter) {
+  $$(".chip").forEach(c => c.classList.remove("isActive"));
+  $$(".chip").forEach(c => {
+    if (c.dataset.filter === filter) c.classList.add("isActive");
+  });
+}
+
+function filterProducts(filter) {
+  currentFilter = filter;
+  setActiveChip(filter);
+
+  const cards = $$("#gridProducts .pCard");
+  cards.forEach(card => {
+    const cat = card.getAttribute("data-cat");
+    const show = filter === "todos" || cat === filter;
+    card.style.display = show ? "" : "none";
+  });
+}
+
+function initFilters() {
+  $$(".chip").forEach(chip => {
+    chip.addEventListener("click", () => {
+      const filter = chip.dataset.filter;
+      filterProducts(filter);
     });
   });
 }
 
-function openProductModal(p) {
-  if (!p) return;
+/* ===========================
+   Modal producto
+=========================== */
+const modal = $("#modal");
+const mImg = $("#mImg");
+const mTag = $("#mTag");
+const mTitle = $("#mTitle");
+const mDesc = $("#mDesc");
+const mPrice = $("#mPrice");
+const mWhats = $("#mWhats");
 
-  pmTitle.textContent = p.name;
-  pmImg.src = p.img;
-  pmImg.alt = p.name;
-  pmDesc.textContent = p.desc;
-  pmTag.textContent = p.tag;
-  pmPrice.textContent = p.price;
+function openModal(prod) {
+  if (!modal) return;
 
-  // Reinicia cantidad
-  qtyInput.value = 1;
+  mImg.src = prod.img;
+  mImg.alt = prod.title;
+  mTag.textContent = prod.tag;
+  mTitle.textContent = prod.title;
+  mDesc.textContent = prod.desc;
+  mPrice.textContent = prod.price;
 
-  // Link WhatsApp con cantidad
-  pmWhatsapp.href = whatsappLink(
-    BASE_MESSAGE + `Quiero pedir: *${p.name}* — Cantidad: ${qtyInput.value}.`
-  );
+  mWhats.href = waLink(`Hola Aurora! Quiero pedir: ${prod.title} (${prod.price}) 😊`);
+
+  modal.classList.remove("hidden");
+  modal.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
 }
 
-// Qty buttons
-qtyMinus.addEventListener("click", () => {
-  const v = Math.max(1, Number(qtyInput.value || 1) - 1);
-  qtyInput.value = v;
-  if (currentProduct) {
-    pmWhatsapp.href = whatsappLink(BASE_MESSAGE + `Quiero pedir: *${currentProduct.name}* — Cantidad: ${v}.`);
-  }
-});
-qtyPlus.addEventListener("click", () => {
-  const v = Number(qtyInput.value || 1) + 1;
-  qtyInput.value = v;
-  if (currentProduct) {
-    pmWhatsapp.href = whatsappLink(BASE_MESSAGE + `Quiero pedir: *${currentProduct.name}* — Cantidad: ${v}.`);
-  }
-});
-qtyInput.addEventListener("input", () => {
-  const v = Math.max(1, Number(qtyInput.value || 1));
-  qtyInput.value = v;
-  if (currentProduct) {
-    pmWhatsapp.href = whatsappLink(BASE_MESSAGE + `Quiero pedir: *${currentProduct.name}* — Cantidad: ${v}.`);
-  }
-});
-
-/* =========================
-   Animaciones: reveal on scroll
-   ========================= */
-function revealOnScroll() {
-  const els = document.querySelectorAll(".reveal");
-
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add("show");
-        io.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.12 });
-
-  els.forEach(el => io.observe(el));
+function closeModal() {
+  if (!modal) return;
+  modal.classList.add("hidden");
+  modal.setAttribute("aria-hidden", "true");
+  document.body.style.overflow = "";
 }
 
-revealOnScroll();
+function initModal() {
+  if (!modal) return;
 
-/* =========================
-   Contadores en hero
-   ========================= */
-function animateCounters() {
-  const counters = document.querySelectorAll(".count");
-  counters.forEach(c => {
-    const target = Number(c.getAttribute("data-count") || 0);
-    let current = 0;
-    const steps = 40;
-    const inc = Math.max(1, Math.round(target / steps));
-
-    const timer = setInterval(() => {
-      current += inc;
-      if (current >= target) {
-        c.textContent = target;
-        clearInterval(timer);
-      } else {
-        c.textContent = current;
-      }
-    }, 18);
-  });
-}
-
-// Dispara contadores cuando el hero entra
-const hero = document.querySelector(".hero");
-const heroObs = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      animateCounters();
-      heroObs.disconnect();
+  // Click en backdrop o botones con data-close
+  modal.addEventListener("click", (e) => {
+    const el = e.target;
+    if (el && el.getAttribute && el.getAttribute("data-close") === "1") {
+      closeModal();
     }
   });
-}, { threshold: 0.3 });
 
-heroObs.observe(hero);
+  // Esc para cerrar
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !modal.classList.contains("hidden")) {
+      closeModal();
+    }
+  });
+}
+
+/* ===========================
+   Menú mobile
+=========================== */
+const btnMenu = $("#btnMenu");
+const menuMobile = $("#menuMobile");
+
+function initMobileMenu() {
+  if (!btnMenu || !menuMobile) return;
+
+  btnMenu.addEventListener("click", () => {
+    menuMobile.classList.toggle("hidden");
+  });
+
+  // cerrar al clickear un link
+  $$("a", menuMobile).forEach(a => {
+    a.addEventListener("click", () => menuMobile.classList.add("hidden"));
+  });
+}
+
+/* ===========================
+   Reveal on scroll (IntersectionObserver)
+=========================== */
+let revealObserver = null;
+
+function setupReveal() {
+  const nodes = $$(".reveal");
+  if (!nodes.length) return;
+
+  if (!revealObserver) {
+    revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(ent => {
+        if (ent.isIntersecting) {
+          ent.target.classList.add("isIn");
+          revealObserver.unobserve(ent.target);
+        }
+      });
+    }, { threshold: 0.12 });
+  }
+
+  nodes.forEach(n => {
+    if (!n.classList.contains("isIn")) revealObserver.observe(n);
+  });
+}
+
+/* ===========================
+   Scroll helpers
+=========================== */
+const btnScrollOpiniones = $("#btnScrollOpiniones");
+
+function initScrollButtons() {
+  if (btnScrollOpiniones) {
+    btnScrollOpiniones.addEventListener("click", () => {
+      const target = $("#opiniones");
+      if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  }
+}
+
+/* ===========================
+   Promo del día (simple)
+=========================== */
+const btnPromo = $("#btnPromo");
+
+function initPromo() {
+  if (!btnPromo) return;
+
+  // Rotación por día (estable)
+  const promos = [
+    { title: "Promo Facturas", msg: "2 docenas de facturas + 10% off 🎁" },
+    { title: "Promo Medialunas", msg: "12 medialunas + regalo sorpresa ☕" },
+    { title: "Promo Combo Mañana", msg: "Combo “Mañana completa” con descuento 🥐🍞" },
+    { title: "Promo Salado", msg: "Chipá + sándwich de miga a precio especial 🧀" }
+  ];
+  const idx = new Date().getDate() % promos.length;
+  const promo = promos[idx];
+
+  btnPromo.addEventListener("click", () => {
+    alert(`${promo.title}\n\n${promo.msg}\n\nPedilo por WhatsApp 😉`);
+  });
+}
+
+/* ===========================
+   Form → WhatsApp
+=========================== */
+const formMsg = $("#formMsg");
+const fNombre = $("#fNombre");
+const fZona = $("#fZona");
+const fPedido = $("#fPedido");
+const fNotas = $("#fNotas");
+const btnLimpiar = $("#btnLimpiar");
+
+function initForm() {
+  if (!formMsg) return;
+
+  formMsg.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const nombre = (fNombre?.value || "").trim();
+    const zona = (fZona?.value || "").trim();
+    const pedido = (fPedido?.value || "").trim();
+    const notas = (fNotas?.value || "").trim();
+
+    const parts = [
+      `Hola Aurora! Soy ${nombre}.`,
+      `Zona: ${zona}.`,
+      `Quiero pedir: ${pedido}.`
+    ];
+    if (notas) parts.push(`Notas: ${notas}.`);
+
+    parts.push("😊");
+
+    const msg = parts.join(" ");
+    window.open(waLink(msg), "_blank", "noopener");
+  });
+
+  if (btnLimpiar) {
+    btnLimpiar.addEventListener("click", () => {
+      if (fNombre) fNombre.value = "";
+      if (fZona) fZona.value = "";
+      if (fPedido) fPedido.value = "";
+      if (fNotas) fNotas.value = "";
+      fNombre?.focus?.();
+    });
+  }
+}
+
+/* ===========================
+   Año en footer
+=========================== */
+function setYear() {
+  const y = $("#year");
+  if (y) y.textContent = String(new Date().getFullYear());
+}
+
+/* ===========================
+   Navbar compact al scrollear
+=========================== */
+const nav = $("#nav");
+
+function initNavCompact() {
+  if (!nav) return;
+
+  const onScroll = () => {
+    if (window.scrollY > 18) nav.classList.add("navIsCompact");
+    else nav.classList.remove("navIsCompact");
+  };
+
+  onScroll();
+  window.addEventListener("scroll", onScroll, { passive: true });
+}
+
+/* ===========================
+   Init
+=========================== */
+document.addEventListener("DOMContentLoaded", () => {
+  setYear();
+  initMobileMenu();
+  initModal();
+  initFilters();
+  initScrollButtons();
+  initPromo();
+  initForm();
+  initNavCompact();
+
+  renderProducts(PRODUCTS);
+  filterProducts("todos");
+  setupReveal();
+});
